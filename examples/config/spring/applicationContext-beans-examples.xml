@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="gb2312"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.1.xsd"
+	default-lazy-init="true" default-autowire="byName">
+	
+  	<!-- 
+	@desc: examples
+	@author: 
+	@date: 
+	********************************************************************************************* begin -->
+	<!-- 演示事件 -->
+	<bean id="test1Event" class="cn.com.widemex.examples.exampleTable.event.Test1Event"/>
+	<bean id="test2Event" class="cn.com.widemex.examples.exampleTable.event.Test2Event"/>
+	
+	<!-- 表格演示 -->
+	<!-- 自定义视图类 -->
+	<bean id="exampleView" class="cn.com.widemex.examples.exampleTable.view.ExampleViewImpl">
+		<!-- 注入服务类，如果不配置，则框架将会根据BaseService接口类型自动注入exampleService -->
+		<property name="baseService">
+			<ref bean="exampleService" />
+		</property>
+	</bean>
+	<!-- 自定义服务类 -->
+	<bean id="exampleService" class="cn.com.widemex.examples.exampleTable.service.ExampleServiceImpl">
+		<!-- 注入DAO，如果不配置，则框架将会根据BaseDao接口类型自动注入exampleDao -->
+		<property name="baseDao">
+			<ref bean="exampleDao" />
+		</property>
+		<!-- 配置事件监听 -->
+        <property name="listener">
+			<list>
+				<ref bean="test1Event"/>
+				<ref bean="test2Event"/>
+			</list>
+        </property>
+	</bean>
+	<!-- 自定义数据操作类 -->
+	<bean id="exampleDao" class="cn.com.widemex.examples.exampleTable.dao.ExampleDaoImpl">
+        <!-- 设置SQL/HQL MAP
+			可在DAO中通过this.getSqlMap(key)获得指定的查询语句 
+		-->
+		<property name="sqlMap">
+			<map>
+				<!-- 查询所有数据 -->
+				<entry key="queryAll" value="from ExampleTable"/>
+				<!-- 根据参数查询数据 -->
+				<entry key="queryByCol1" value="from ExampleTable where col1=?"/>
+			</map>
+		</property>
+	</bean>
+	<!-- ****************************************************************************************** end -->
+	
+  	<!-- 
+	@desc: examples, other db
+	@author: 
+	@date: 
+	********************************************************************************************* begin -->
+	<!--
+	<bean id="otherDBDao" class="cn.com.widemex.examples.otherDB.dao.OtherDBDaoImpl" autowire="no">
+		<property name="sessionFactory">
+			<ref bean="wides1-sessionFactory" />
+		</property>	
+	</bean>
+	-->
+	<!-- ****************************************************************************************** end -->
+
+	<!-- 
+	@desc: 统计图
+	@author: 
+	@date: 
+	********************************************************************************************* begin -->
+	<!-- 简单统计图 
+	<bean id="chart1Dao" class="cn.com.widemex.examples.charts.dao.Chart1DaoImpl"/>
+	<bean id="chart1Service" class="cn.com.widemex.examples.charts.service.Chart1ServiceImpl">-->
+		<!-- 注入DAO 
+		<property name="baseDao">
+			<ref bean="chart1Dao" />
+		</property>
+	</bean>
+	<bean id="chart1View" class="cn.com.widemex.examples.charts.view.Chart1ViewImpl">-->
+		<!-- 注入服务类 
+		<property name="baseService">
+			<ref bean="chart1Service" />
+		</property>
+	</bean>-->
+
+	<!-- 分组统计图 
+	<bean id="chart2View" class="cn.com.widemex.examples.charts.view.Chart2ViewImpl"/>-->
+
+	<!-- 仪表盘 
+	<bean id="chart3View" class="cn.com.widemex.examples.charts.view.Chart3ViewImpl"/>-->
+
+</beans>

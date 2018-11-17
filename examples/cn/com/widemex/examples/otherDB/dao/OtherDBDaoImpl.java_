@@ -1,0 +1,14 @@
+package cn.com.widemex.examples.otherDB.dao;
+
+import cn.com.widemex.framework.db.HibernateSupport;
+import cn.com.widemex.examples.domain.wides1.SysLogTb;
+
+/**
+ * @author 何启伟
+ * @since 2010-6-26
+ * @version ExtFw3.0
+ *
+ */
+public class OtherDBDaoImpl extends HibernateSupport<SysLogTb> implements OtherDBDao{
+
+}

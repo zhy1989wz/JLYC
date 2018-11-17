@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+注意事项：
+1.excludes：
+	排除po中不需要的属性
+	这个属性必须要注意，否则会导致系统性能低下
+2.includes（推荐）：
+	指定po中需要的属性
+3.defaultAttributes:
+	JSONSTRING的默认属性
+-->
+<tags>
+	<!-- 演示表 -->
+	<exampleTable excludes="exampleTables, exampleTableChilds" includes="" defaultAttributes="">
+		from ExampleTable
+	</exampleTable>
+	
+	<!-- 演示表2 -->
+	<exampleTable2 sql="true">
+		SELECT ID,COL1,COL2,MODIDATE,STATUS FROM S1.EXAMPLE_TABLE
+	</exampleTable2>
+
+    <!-- 演示类型表 -->
+    <exampleType>
+        from ExampleType where name!='1' order by name
+    </exampleType>
+    
+    <!-- 演示表子表 -->
+    <exampleTableChilds>
+        from ExampleTablechilds
+        order by name
+    </exampleTableChilds>
+	
+</tags>

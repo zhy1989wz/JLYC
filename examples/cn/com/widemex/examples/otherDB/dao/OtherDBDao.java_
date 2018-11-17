@@ -1,0 +1,15 @@
+package cn.com.widemex.examples.otherDB.dao;
+
+import cn.com.widemex.examples.domain.wides1.SysLogTb;
+import cn.com.widemex.framework.db.GenericDao;
+
+/**
+ * DAO接口
+ * @author 何启伟
+ * @since 2010-6-26
+ * @version ExtFw3.0
+ *
+ */
+public interface OtherDBDao extends GenericDao<SysLogTb>{
+	
+}
